@@ -21,7 +21,7 @@ const viewEvent = () => {
   const handleCancelRegister = async () => {
     try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.delete(`http://localhost:5000/registration/${id}`, {
+        const response = await axios.delete(`https://event-management-platform.onrender.com/registration/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -45,7 +45,7 @@ const viewEvent = () => {
     const token = localStorage.getItem('authToken');
 
     axios
-      .get(`http://localhost:5000/public/${id}`, {
+      .get(`https://event-management-platform.onrender.com/public/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -19,7 +19,7 @@ const ViewParticipants = () => {
       if (!id) return;
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(`http://localhost:5000/auth/dashboard/data/participants/${id}`, {
+        const response = await axios.get(`https://event-management-platform.onrender.com/auth/dashboard/data/participants/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -32,7 +32,7 @@ const SingleEvent = () => {
     const token = localStorage.getItem('authToken');
 
     axios
-      .get(`http://localhost:5000/auth/dashboard/data/${id}`, {
+      .get(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

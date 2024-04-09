@@ -27,7 +27,7 @@ const QuizPopup = () => {
 
     const fetchQuizData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/auth/dashboard/data/${id}`, {
+        const response = await axios.get(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

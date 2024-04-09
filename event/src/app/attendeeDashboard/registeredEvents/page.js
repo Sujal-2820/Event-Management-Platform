@@ -21,7 +21,7 @@ const RegisteredEvents = () => {
       const token = localStorage.getItem('authToken');
       // Fetch registered events data
       axios
-        .get('http://localhost:5000/registration', {
+        .get('https://event-management-platform.onrender.com/registration', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

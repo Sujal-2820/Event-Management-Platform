@@ -80,7 +80,7 @@ router.post('/:eventId', authMiddleware, async (req, res) => {
     const { organizerEmail, emailSubject, emailDescription, eventDateTime, eventLocation } = await UserData.findById(eventId);
 
     // Send mail confirmation
-    await axios.post('http://localhost:5000/mailConfirmation', {
+    await axios.post('https://event-management-platform.onrender.com/mailConfirmation', {
       attendeeEmail,
       organizerEmail,
       emailSubject,

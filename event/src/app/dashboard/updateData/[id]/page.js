@@ -46,7 +46,7 @@ const UpdateData = () => {
     const token = localStorage.getItem('authToken');
 
     axios
-      .get(`http://localhost:5000/auth/dashboard/data/${id}`, {
+      .get(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -87,7 +87,7 @@ const UpdateData = () => {
     try {
       if (img) {
         // Delete the existing image in Firebase Storage before uploading the new one
-        const userDataResponse = await axios.get(`http://localhost:5000/auth/dashboard/data/${id}`, {
+        const userDataResponse = await axios.get(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -118,7 +118,7 @@ const UpdateData = () => {
       }
 
       // Update title, description, and imageUrl in MongoDB
-      await axios.put(`http://localhost:5000/auth/dashboard/data/${id}`, data, {
+      await axios.put(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`
         }

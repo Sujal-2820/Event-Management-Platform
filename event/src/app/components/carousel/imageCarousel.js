@@ -10,7 +10,7 @@ function ImageCarousel() {
     const fetchData = async () => {
       try {
         // Make a GET request to fetch carousel data from your backend
-        const response = await axios.get('http://localhost:5000/public');
+        const response = await axios.get('https://event-management-platform.onrender.com/public');
         setCarouselData(response.data);
       } catch (error) {
         console.error('Error fetching carousel data:', error);

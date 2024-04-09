@@ -160,7 +160,7 @@ function AddData() {
     try {
       // Send a request to the backend to generate and send OTP to the provided email
       const response = await axios.post(
-        "http://localhost:5000/mailVerify/generate-otp",
+        "https://event-management-platform.onrender.com/mailVerify/generate-otp",
         { email: organizerEmail }
       );
       alert(
@@ -176,7 +176,7 @@ function AddData() {
     try {
       // Send a request to the backend to verify the OTP
       const response = await axios.post(
-        "http://localhost:5000/mailVerify/verify-otp",
+        "https://event-management-platform.onrender.com/mailVerify/verify-otp",
         { email: organizerEmail, otp }
       );
       setOtpVerified(true);
@@ -229,7 +229,7 @@ function AddData() {
 
         // Submit data
         const response = await axios.post(
-          "http://localhost:5000/auth/dashboard/data",
+          "https://event-management-platform.onrender.com/auth/dashboard/data",
           requestData,
           {
             headers: {
@@ -253,7 +253,7 @@ function AddData() {
 
         // Update MongoDB entry with the file name
         await axios.put(
-          `http://localhost:5000/auth/dashboard/data/${dataId}`,
+          `https://event-management-platform.onrender.com/auth/dashboard/data/${dataId}`,
           { imageUrl: [fileName] }, // Use an array for imageUrl
           {
             headers: {

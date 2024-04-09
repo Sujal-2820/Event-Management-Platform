@@ -80,7 +80,7 @@ const viewEvent = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:5000/registration/${id}`,
+        `https://event-management-platform.onrender.com/registration/${id}`,
         { eligibilityStatus, fullName, workEmail, githubURL, linkedinURL, reasonToJoin },
         {
           headers: {
@@ -116,7 +116,7 @@ const viewEvent = () => {
     const token = localStorage.getItem("authToken");
 
     axios
-      .get(`http://localhost:5000/public/${id}`, {
+      .get(`https://event-management-platform.onrender.com/public/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

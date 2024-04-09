@@ -8,9 +8,11 @@ import { getDownloadURL, listAll, ref, deleteObject } from "firebase/storage";
 import "./dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import OrganizerNavbarComponent from "../components/organizerNavbar/organizerNavbar";
+import contentLoading from "./contentLoading";
 
 const Dashboard = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false); 
   const [username, setUsername] = useState("");
   const [storedEmail, setStoredEmail] = useState("");
   const [userType, setUserType] = useState("");
@@ -18,6 +20,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       // Retrieve user information from local storage or API
       const storedUsername = localStorage.getItem("username");
       const userEmail = localStorage.getItem("email");
@@ -31,7 +34,7 @@ const Dashboard = () => {
 
         try {
           const response = await axios.get(
-            "http://localhost:5000/auth/dashboard/data/",
+            "https://event-management-platform.onrender.com/auth/dashboard/data/",
             {
               headers: {
                 Authorization: `Bearer ${authToken}`, // Include auth token in the request headers
@@ -54,6 +57,8 @@ const Dashboard = () => {
           setUserEntries(dataWithImages);
         } catch (error) {
           console.error("Error fetching user entries:", error);
+        }finally {
+          setLoading(false); // Set loading to false after data fetching completes
         }
       } else {
         // Redirect to sign-in if user information or auth token is not available
@@ -72,7 +77,7 @@ const Dashboard = () => {
       await deleteObject(ref(imageDb, imageUrl));
 
       // Delete data from the server
-      await axios.delete(`http://localhost:5000/auth/dashboard/data/${id}`, {
+      await axios.delete(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, {
         headers: {
           Authorization: `Bearer ${authToken}`, // Include auth token in the request headers
         },
@@ -164,6 +169,7 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
+    {loading && <contentLoading />}
     </>
   );
 };

@@ -18,7 +18,7 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/auth/signup", {
+      const response = await axios.post("https://event-management-platform.onrender.com/auth/signup", {
         username,
         email,
         password,
