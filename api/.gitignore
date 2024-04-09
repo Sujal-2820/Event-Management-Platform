@@ -12,10 +12,3 @@ node_modules/
 # Ignore build artifacts
 /build
 
-# Ignore any compiled code or dependencies
-*.js
-*.map
-
-# Ignore any editor or IDE specific files
-.vscode/
-.idea/
