@@ -1,0 +1,135 @@
+.add-data-title {
+  color: #4b0082; 
+}
+
+.add-data-form {
+  margin-top: 20px;
+}
+
+.add-data-title-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #0e0e0efa;
+}
+
+.add-data-title-input,
+.add-data-description-input,
+.add-data-domain-select,
+.add-data-image-input,
+.add-data-question-input,
+.add-data-option-input,
+.add-data-correct-option-input,
+.add-data-time-per-question-input,
+.add-data-minimum-score-input,
+.add-data-organizer-email-input,
+.add-data-otp-input,
+.add-data-email-subject-input,
+.add-data-email-description-input,
+.add-data-event-datetime-input,
+.add-data-event-location-input {
+  width: 30%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.add-data-submit-button,
+.add-data-add-question-button,
+.add-data-send-otp-button,
+.add-data-verify-otp-button {
+  width: 10%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.X-button {
+  width: 5%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.checkbox-label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-right: -100px;
+  margin-top: -16px;
+  position: relative;
+  padding: 5px;
+}
+
+.add-data-event-domain-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #0e0e0efa;
+}
+
+.add-data-event-domain-select {
+  width: 30%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.add-data-event-domain-button {
+  width: 10%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.add-data-submit-button {
+  background-color: #4a20a5; 
+  color: #fff; 
+  cursor: pointer;
+}
+
+.add-data-submit-button:hover {
+  background-color: #191970; 
+}
+
+.add-data-warning-note {
+  color: #ff0000; 
+}
+
+@media only screen and (max-width: 600px) {
+  .add-data-form div {
+    padding: 10px;
+  }
+  .add-data-title-input,
+  .add-data-description-input,
+  .add-data-domain-select,
+  .add-data-image-input,
+  .add-data-question-input,
+  .add-data-option-input,
+  .add-data-correct-option-input,
+  .add-data-time-per-question-input,
+  .add-data-minimum-score-input,
+  .add-data-organizer-email-input,
+  .add-data-otp-input,
+  .add-data-email-subject-input,
+  .add-data-email-description-input,
+  .add-data-event-datetime-input,
+  .add-data-event-location-input {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  .add-data-submit-button,
+  .add-data-add-question-button,
+  .add-data-send-otp-button,
+  .add-data-verify-otp-button {
+    width: 10%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+}

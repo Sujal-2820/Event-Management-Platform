@@ -1,0 +1,21 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore any log files
+*.log
+
+# Ignore environment-specific files
+.env
+.env.local
+.env.*.local
+
+# Ignore build artifacts
+/build
+
+# Ignore any compiled code or dependencies
+*.js
+*.map
+
+# Ignore any editor or IDE specific files
+.vscode/
+.idea/

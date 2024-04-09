@@ -1,0 +1,70 @@
+.edit-data-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(13, 13, 13, 0.1);
+  }
+  
+  h2 {
+    color: #4b0082;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  input,
+  textarea,
+  button,
+  label,
+  span {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  h3 {
+    color: #4b0082;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Quiz Questions Section */
+  label[for^="uploadNewImage"],
+  label[for^="question"],
+  label[for^="correctOption"],
+  label[for="timePerQuestion"],
+  label[for="minimumScore"],
+  label[for^="email"] {
+    display: block;
+    margin-bottom: 5px;
+    color: #0e0e0efa;
+  }
+  
+  button[type="button"],
+  button[type="submit"] {
+    background-color: #4a20a5;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  button[type="button"]:hover,
+  button[type="submit"]:hover {
+    background-color: #191970;
+  }
+  
+  .warning-note {
+    color: #ff0000;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .edit-data-container {
+      padding: 10px;
+    }
+  }
+  

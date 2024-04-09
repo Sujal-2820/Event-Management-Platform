@@ -1,0 +1,85 @@
+/* SignIn.css */
+.user.signinBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.user.signinBox .formBox {
+  width: 300px;
+  padding: 40px; /* Increased padding */
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.user.signinBox .formBox h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.user.signinBox .formBox input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.user.signinBox .formBox button {
+  width: 100%;
+  padding: 10px;
+  background-color: #677eff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user.signinBox .formBox button:hover {
+  background-color: #4763ff;
+}
+
+.user.signinBox .formBox .signup {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.user.signinBox .formBox .signup a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #677eff;
+}
+
+.user.signinBox .formBox .signup a:hover{
+  cursor: pointer;
+}
+
+
+/* for eye icon */
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.password-container .eye-icon {
+  position: absolute;
+  top: 50%;  /* Center vertically */
+  right: 20px;
+  transform: translateY(-80%);  /* Adjust the position */
+  cursor: pointer;
+}
+
+.signin-error-message{
+  color: red;
+}

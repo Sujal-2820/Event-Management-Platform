@@ -1,0 +1,18 @@
+.event-home-page-header-container{
+    
+    justify-content: center; 
+    text-align: center;
+    background: linear-gradient(to bottom, #0059ff, #ffffff); 
+    padding: 20px 0; 
+    min-height: 50vh;
+}
+
+.event-home-page-header-content-main{
+    margin-top: 30px;
+    font-weight: 600;
+    color: floralwhite;
+}
+
+.event-home-page-header-content-follow{
+    color: rgb(38, 38, 38);
+}

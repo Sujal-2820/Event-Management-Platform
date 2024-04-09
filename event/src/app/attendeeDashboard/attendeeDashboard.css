@@ -1,0 +1,111 @@
+.attendee-dashboard-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FCFDF2;
+    box-shadow: 0 0 10px rgba(13, 13, 13, 0.1);
+  }
+  
+  .welcome-heading {
+    color: #3B3486;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .email-paragraph,
+  .user-type-paragraph {
+    color: #7743DB;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .event-list-section {
+    margin-bottom: 30px;
+  }
+  
+  .event-list-heading {
+    color: #3B3486;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .event-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .event-list-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc; /* Add subtle border */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .event-list-item:hover {
+    border-color: #3B3486; /* Change border color on hover */
+  }
+  
+  .event-title {
+    color: #3B3486;
+    font-weight: bold;
+  }
+  
+  .event-description {
+    color: #7743DB;
+  }
+  
+  .event-image {
+    max-width: 40%; /* Adjust width for even appearance */
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .view-event-button,
+  .registered-events-button,
+  .sign-out-button {
+    background-color: #3B3486;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .event-filter-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Media Queries */
+  
+  @media only screen and (max-width: 768px) {
+    .attendee-dashboard-container {
+      padding: 10px;
+    }
+  
+    .welcome-heading {
+      font-size: 20px;
+    }
+  
+    .email-paragraph,
+    .user-type-paragraph {
+      font-size: 16px;
+    }
+  
+    .event-image {
+      max-width: 50%; /* Adjust width for smaller screens */
+    }
+  
+    .event-filter-input {
+      width: calc(100% - 20px); /* Adjust width for smaller screens */
+      margin-right: 10px; /* Add some spacing */
+    }
+  }
+  

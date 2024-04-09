@@ -1,0 +1,59 @@
+
+.carousel-body {
+    margin: auto;
+    height: 100%;
+    
+  }
+
+.view-details-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .view-details-button:hover {
+    background-color: #0056b3;
+  }
+
+
+  .carousel-item img {
+    /* width: 50%;
+    height: auto; */
+    margin: 0px auto;
+    filter: brightness(60%); /* Adjust the brightness value as needed */
+  }
+  
+  
+
+  @media screen and (max-width: 600px) {
+    .carousel {
+      width: 100%;
+    }
+    .carousel-item img {
+      margin: 0px auto;
+    }
+  }
+  
+  /* Add styles for tablets (between 600px and 900px) */
+  @media screen and (min-width: 601px) and (max-width: 900px) {
+    .carousel {
+      width: 85%; /* Adjust the width as needed */
+    }
+  }
+  
+  /* Add styles for laptops and larger screens (greater than 900px) */
+  @media screen and (min-width: 901px) {
+    .carousel {
+      width: 85%; /* Adjust the width as needed */
+    }
+  }
+
+ 
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.08); /* Semi-transparent black background */
+    color: white;
+    padding: 20px;
+  }

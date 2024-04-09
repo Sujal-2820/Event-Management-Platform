@@ -1,0 +1,13 @@
+.home-page-card-container {
+    margin-left: 125px;
+}
+
+@media only screen and (max-width: 767px){
+    .home-page-card-container {
+        margin-left: 40px;
+    }
+
+    .unique-home-page-each-card{
+        margin-bottom: 10px;
+    }
+}

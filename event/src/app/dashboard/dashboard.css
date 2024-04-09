@@ -1,0 +1,38 @@
+.unique-organizer-dashboard-container {
+  padding: 20px;
+}
+
+.unique-organizer-dashboard-username-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.unique-organizer-dashboard-email-paragraph,
+.unique-organizer-dashboard-user-type-paragraph {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.unique-organizer-dashboard-user-entries-section {
+  margin-top: 30px;
+}
+
+.unique-organizer-dashboard-user-entries-heading {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.unique-organizer-dashboard-entry-buttons button {
+  margin-right: 10px;
+}
+
+.unique-organizer-image{
+  width: 50px; 
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 767px){
+  .unique-organizer-dashboard-view-participants-button{
+    margin-top: 5px;
+  }
+}

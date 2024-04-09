@@ -1,0 +1,257 @@
+"use client";
+
+// // src/app/attendeeDashboard/page.js
+// import React, { useEffect, useState } from "react";
+// import { useRouter } from "next/navigation";
+// import axios from "axios";
+// import { imageDb } from "../../../firebase";
+// import { getDownloadURL, listAll, ref } from "firebase/storage";
+// import "./attendeeDashboard.css";
+
+// const AttendeeDashboard = () => {
+//   const router = useRouter();
+//   const [UserID, setUserID] = useState("");
+//   const [username, setUsername] = useState("");
+//   const [storedEmail, setStoredEmail] = useState("");
+//   const [userType, setStoredUserType] = useState("");
+//   const [organizerData, setOrganizerData] = useState([]);
+
+//   useEffect(() => {
+//     // Retrieve user information from local storage or API
+//     const storedUsername = localStorage.getItem("username");
+//     const userEmail = localStorage.getItem("email");
+//     const userType = localStorage.getItem("userType");
+
+//     if (storedUsername) {
+//       setUsername(storedUsername);
+//       setStoredEmail(userEmail);
+//       setStoredUserType(userType);
+
+//       // Fetch organizer data
+//       axios
+//         .get("http://localhost:5000/public") // Replace with your API endpoint
+//         .then(async (response) => {
+//           const dataWithImages = await Promise.all(
+//             response.data.map(async (entry) => {
+//               const imgs = await listAll(ref(imageDb, `files/${entry._id}`));
+//               const urls = await Promise.all(
+//                 imgs.items.map((val) => getDownloadURL(val))
+//               );
+//               const imageUrl = urls.length > 0 ? urls[0] : "";
+
+//               return { ...entry, imageUrl };
+//             })
+//           );
+
+//           setOrganizerData(dataWithImages);
+//         })
+//         .catch((error) => {
+//           console.error("Error fetching organizer data:", error);
+//         });
+//     } else {
+//       // Redirect to sign-in if user information is not available
+//       router.push("/signin");
+//     }
+//   }, [router]);
+
+//   const handleSignOut = () => {
+//     // Clear user information from local storage and redirect to sign-in
+//     localStorage.removeItem("authToken");
+//     localStorage.removeItem("userType");
+//     localStorage.removeItem("username");
+//     router.push("/signin");
+//   };
+
+//   return (
+//     <div className="attendee-dashboard-container">
+//       <h1 className="welcome-heading">Welcome {username}!</h1>
+//       <p className="email-paragraph">Your Email: {storedEmail}</p>
+//       <p className="user-type-paragraph">You are an: {userType}</p>
+
+//       <div className="event-list-section">
+//         <h2 className="event-list-heading">List of Events:</h2>
+//         <br />
+//         <ul className="event-list">
+//           {organizerData.map((item) => (
+//             <li key={item._id} className="event-list-item">
+//               <p className="event-title">Title: {item.title}</p>
+//               <p className="event-description">
+//                 Description: {item.description}
+//               </p>
+//               {item.imageUrl && (
+//                 <img
+//                   className="event-image"
+//                   src={item.imageUrl}
+//                   alt="Organizer Image"
+//                 />
+//               )}
+//               <button
+//                 className="view-event-button"
+//                 onClick={() =>
+//                   router.push(`/attendeeDashboard/viewEvent/${item._id}`)
+//                 }
+//               >
+//                 View Event
+//               </button>
+//               <br />
+//               <br />
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       <button
+//         className="registered-events-button"
+//         onClick={() => router.push("/attendeeDashboard/registeredEvents/")}
+//       >
+//         View Registered Events
+//       </button>
+//       <br />
+//       <button className="sign-out-button" onClick={handleSignOut}>
+//         Sign Out
+//       </button>
+//     </div>
+//   );
+// };
+
+// export default AttendeeDashboard;
+
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { imageDb } from "../../../firebase";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
+import "./attendeeDashboard.css";
+import NavbarComponent from "../components/navbar/navbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+const AttendeeDashboard = () => {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [storedEmail, setStoredEmail] = useState("");
+  const [userType, setUserType] = useState("");
+  const [organizerData, setOrganizerData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    // Retrieve user information from local storage or API
+    const storedUsername = localStorage.getItem("username");
+    const userEmail = localStorage.getItem("email");
+    const userType = localStorage.getItem("userType");
+
+    if (storedUsername) {
+      setUsername(storedUsername);
+      setStoredEmail(userEmail);
+      setUserType(userType);
+
+      // Fetch organizer data
+      axios
+        .get("http://localhost:5000/public") // Replace with your API endpoint
+        .then(async (response) => {
+          const dataWithImages = await Promise.all(
+            response.data.map(async (entry) => {
+              const imgs = await listAll(ref(imageDb, `files/${entry._id}`));
+              const urls = await Promise.all(
+                imgs.items.map((val) => getDownloadURL(val))
+              );
+              const imageUrl = urls.length > 0 ? urls[0] : "";
+
+              return { ...entry, imageUrl };
+            })
+          );
+
+          setOrganizerData(dataWithImages);
+          setFilteredData(dataWithImages); // Initialize filteredData with all organizerData
+        })
+        .catch((error) => {
+          console.error("Error fetching organizer data:", error);
+        });
+    } else {
+      // Redirect to sign-in if user information is not available
+      router.push("/signin");
+    }
+  }, [router]);
+
+  const handleSignOut = () => {
+    // Clear user information from local storage and redirect to sign-in
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("username");
+    router.push("/signin");
+  };
+
+  // Function to filter events based on search term
+  const handleFilter = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredEvents = organizerData.filter((event) =>
+      event.title.toLowerCase().includes(searchTerm)
+    );
+    setFilteredData(filteredEvents);
+  };
+
+  return (
+    <>
+      <NavbarComponent />
+
+      <div className="attendee-dashboard-container">
+        <h1 className="welcome-heading">Welcome {username}!</h1>
+        <p className="email-paragraph">Your Email: {storedEmail}</p>
+        <p className="user-type-paragraph">You are an: {userType}</p>
+
+        <div className="event-list-section">
+          <h2 className="event-list-heading">List of Events:</h2>
+          <br />
+          {/* Filter input */}
+          <input
+            type="text"
+            className="event-filter-input"
+            placeholder="Search events..."
+            onChange={handleFilter}
+          />
+
+          <ul className="event-list">
+            {filteredData.map((item) => (
+              <li key={item._id} className="event-list-item">
+                <p className="event-title">Title: {item.title}</p>
+                <p className="event-description">
+                  Description: {item.description}
+                </p>
+                {item.imageUrl && (
+                  <img
+                    className="event-image"
+                    src={item.imageUrl}
+                    alt="Organizer Image"
+                  />
+                )}
+                <button
+                  className="view-event-button"
+                  onClick={() =>
+                    router.push(`/attendeeDashboard/viewEvent/${item._id}`)
+                  }
+                >
+                  View Event
+                </button>
+                <br />
+                <br />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <button
+          className="registered-events-button"
+          onClick={() => router.push("/attendeeDashboard/registeredEvents/")}
+        >
+          View Registered Events
+        </button>
+        <br />
+        <button className="sign-out-button" onClick={handleSignOut}>
+          Sign Out
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default AttendeeDashboard;

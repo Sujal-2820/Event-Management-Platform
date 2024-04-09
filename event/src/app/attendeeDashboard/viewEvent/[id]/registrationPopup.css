@@ -1,0 +1,56 @@
+/* registrationPopup.css */
+
+.registration-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 400px;
+    background-color: rgba(144, 142, 142, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px); /* Add backdrop filter for background blur */
+  }
+  
+  .registration-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+  }
+  
+  .label-style {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+  }
+  
+  .input-style {
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .textarea-style {
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    resize: vertical;
+  }
+  
+  .submit-button-style {
+    padding: 10px;
+    font-size: 16px;
+    background-color: aliceblue;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

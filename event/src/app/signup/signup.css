@@ -1,0 +1,91 @@
+/* SignUp.css */
+.user.signupBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.user.signupBox .formBox {
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.user.signupBox .formBox h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.user.signupBox .formBox input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.user.signupBox .formBox select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.user.signupBox .formBox button {
+  width: 100%;
+  padding: 10px;
+  background-color: #677eff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user.signupBox .formBox button:hover {
+  background-color: #4763ff;
+}
+
+.user.signupBox .formBox .signin {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.user.signupBox .formBox .signin a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #677eff;
+}
+
+.user.signupBox .formBox .signin a:hover{
+  cursor: pointer;
+}
+
+
+/* For eye icon */
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  width: calc(100% - 30px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.password-container .eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 20px; /* Adjusted right position */
+  transform: translateY(-80%);
+  cursor: pointer;
+}
+

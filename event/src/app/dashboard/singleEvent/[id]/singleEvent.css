@@ -1,0 +1,51 @@
+body{
+  background-color: white;
+  height: 100vh;
+
+}
+
+.single-event-container {
+    height: 100vh;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(13, 13, 13, 0.1);
+  }
+  
+  h2 {
+    color: #4b0082;
+  }
+  
+  p {
+    margin-bottom: 15px;
+    color: #191970;
+  }
+  
+  h3 {
+    color: #4b0082;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  button {
+    background-color: #4a20a5;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #191970;
+  }
+  
+  
+  @media only screen and (max-width: 600px) {
+    .single-event-container {
+      padding: 10px;
+    }
+  }
+  
