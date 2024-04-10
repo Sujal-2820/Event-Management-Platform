@@ -6,6 +6,10 @@ import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { imageDb } from '../../../../../firebase';
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
+import AttendeeNavbarComponent from '@/app/components/attendeeNavbar/attendeeNavbar';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./viewRegisteredEvent.css"
+
 
 const viewEvent = () => {
   const router = useRouter();
@@ -70,21 +74,20 @@ const viewEvent = () => {
   }, [id]);
 
   return (
-    <div className="single-event-container">
-      <h2>Event Details</h2>
+    <>
+    <AttendeeNavbarComponent/>
+    <div className="view-registered-event-single-event-container">
+      <h2 className="view-registered-event-single-event-heading">Event Details</h2>
       <br />
-      <p>Title: {data.title}</p>
-      <br />
-      <p>Description: {data.description}</p>
-      <br />
-      <h3>Image:</h3>
-      {data.imageUrl && <img src={data.imageUrl} alt="Event Image" height="200" width="200" />}
-      <br />
-      <br />
-
-      <button onClick={handleCancelRegister}>Cancel Registration</button>
+      {data.imageUrl && <img src={data.imageUrl} alt="Event Image" className="view-registered-event-image" height="300" width="350" />}
+      <br/>
+      <p className="view-registered-event-title">{data.title}</p>
+      <p className="view-registered-event-description">{data.description}</p>
+      <br /> 
+      <button onClick={handleCancelRegister} className="view-registered-event-cancel-registration-button">Cancel Registration</button>
 
     </div>
+    </>
   );
 };
 

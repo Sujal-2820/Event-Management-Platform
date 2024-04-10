@@ -14,9 +14,9 @@
     border-radius: 0; /* Remove border radius */
   }
   
-  .navbar-brand {
-    color: #fff; /* Set text color to white */
-    font-weight: bold; /* Set font weight to bold */
+  .organizer-navbar-brand-logo{
+    color: #fff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
   
   .navbar-nav .nav-link {

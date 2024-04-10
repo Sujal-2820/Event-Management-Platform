@@ -4,7 +4,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
-import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import OrganizerNavbarComponent from "../../../components/organizerNavbar/organizerNavbar";
 import "./viewParticipants.css";
@@ -45,9 +44,9 @@ const ViewParticipants = () => {
               <div className="card-body">
                 <h5 className="card-title participant-name">{participant.fullName}</h5>
                 <p className="card-text">
-                <i class="fa fa-github-alt" aria-hidden="true"></i> <a href={participant.githubURL} target="_blank" rel="noreferrer">Github</a>
+                <i class="fa fa-github-alt"></i> <a href={participant.githubURL} target="_blank" rel="noreferrer">Github</a>
                   <br />
-                  <i class="fa fa-linkedin" aria-hidden="true"></i> <a href={participant.linkedinURL} target="_blank" rel="noreferrer">LinkedIn</a>
+                  <i class="fa fa-linkedin"></i> <a href={participant.linkedinURL} target="_blank" rel="noreferrer">LinkedIn</a>
                 </p>
                 <a href="#" className="btn btn-primary check-in-button">Check In</a>
               </div>

@@ -14,9 +14,14 @@
     border-radius: 0; /* Remove border radius */
   }
   
-  .navbar-brand {
-    color: #fff; /* Set text color to white */
-    font-weight: bold; /* Set font weight to bold */
+  .attendee-navbar-brand-logo{
+    color: #fff;
+    font-weight: 500;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  .attendee-navbar-brand-logo:hover{
+    color: #fff;
   }
   
   .navbar-nav .nav-link {

@@ -43,7 +43,7 @@ function AttendeeNavbarComponent() {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">Event Logo</Navbar.Brand>
+        <Navbar.Brand className="attendee-navbar-brand-logo">EventSphere</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

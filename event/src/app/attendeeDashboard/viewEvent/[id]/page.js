@@ -9,6 +9,9 @@ import { getDownloadURL, listAll, ref } from "firebase/storage";
 import "./QuizPopUp.css";
 import "./eventPage.css";
 import "./registrationPopup.css";
+import AttendeeNavbarComponent from "@/app/components/attendeeNavbar/attendeeNavbar";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 const viewEvent = () => {
   const router = useRouter();
@@ -176,11 +179,9 @@ const viewEvent = () => {
 
     let updatedEligibilityStatus;
     if (score >= quizData.minimumScore) {
-      updatedEligibilityStatus = "You are eligible to attend the event";
-      setButtonStyle("bright-background");
+      updatedEligibilityStatus = "You are eligible to attend the event";   
     } else {
       updatedEligibilityStatus = "You are not eligible to attend the event";
-      setButtonStyle("dull-background");
     }
 
     setEligibilityStatus(updatedEligibilityStatus);
@@ -189,6 +190,8 @@ const viewEvent = () => {
       setOpenQuizPopup(false);
     }, 8000);
   };
+
+
 
   useEffect(() => {
     let timer;
@@ -219,7 +222,18 @@ const viewEvent = () => {
     return () => clearInterval(timer);
   }, [showQuiz, quizData, quizOver, currentQuestionIndex]);
 
+
+  useEffect(() => {
+    if (eligibilityStatus === "You are eligible to attend the event") {
+      setButtonStyle("bright-background");
+    } else if (eligibilityStatus === "You are not eligible to attend the event") {
+      setButtonStyle("dull-background");
+    }
+  }, [eligibilityStatus]);
+
   return (
+    <>
+    <AttendeeNavbarComponent/>
     <div className="quirky-event-container">
       <h2 className="event-details-heading">Event Details</h2>
       <br />
@@ -393,6 +407,7 @@ const viewEvent = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+
 /* Add this CSS to your stylesheet */
 .view-participant-container {
   padding-top: 50px;
