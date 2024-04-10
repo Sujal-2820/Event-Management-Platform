@@ -48,7 +48,7 @@ router.post('/:eventId', authMiddleware, async (req, res) => {
     );
 
 
-    const { fullName, githubURL, linkedinURL, reasonToJoin } = req.body;
+    const { fullName, workEmail, githubURL, linkedinURL, reasonToJoin } = req.body;
     // Update UserData model with the registered user
     const updatedUserData = await UserData.findByIdAndUpdate(
       eventId,

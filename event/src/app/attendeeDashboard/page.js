@@ -9,6 +9,7 @@ import "./attendeeDashboard.css";
 import NavbarComponent from "../components/navbar/navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventsLoading from "./eventsLoading";
+import AttendeeNavbarComponent from "../components/attendeeNavbar/attendeeNavbar";
 
 
 const AttendeeDashboard = () => {
@@ -82,7 +83,7 @@ const AttendeeDashboard = () => {
 
   return (
     <>
-      <NavbarComponent />
+      <AttendeeNavbarComponent />
 
       <div className="attendee-dashboard-container">
         <h1 className="welcome-heading">Welcome {username}!</h1>
