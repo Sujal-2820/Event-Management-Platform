@@ -11,6 +11,9 @@ import "./eventPage.css";
 import "./registrationPopup.css";
 import AttendeeNavbarComponent from "@/app/components/attendeeNavbar/attendeeNavbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "@/app/components/footer/Footer";
+import Toast from "react-bootstrap/Toast";
+import Button from "react-bootstrap/Button";
 
 
 const viewEvent = () => {
@@ -21,6 +24,8 @@ const viewEvent = () => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [buttonStyle, setButtonStyle] = useState("dull-background");
   const [openRegistrationPopup, setOpenRegistrationPopup] = useState(false);
+  const [showSuccessfulRegistrationToast, setShowSuccessfulRegistrationToast] = useState(false);
+  const [registrationMessage, setRegistrationMessage] = useState("");
 
   const [data, setData] = useState({
     title: "",
@@ -93,7 +98,8 @@ const viewEvent = () => {
       );
 
       console.log("Registration successful:", response.data);
-      alert(response.data.message);
+      setRegistrationMessage(response.data.message);
+      setShowSuccessfulRegistrationToast(true);
       setOpenRegistrationPopup(false);
     } catch (error) {
       console.error("Error registering for event:", error);
@@ -234,6 +240,7 @@ const viewEvent = () => {
   return (
     <>
     <AttendeeNavbarComponent/>
+    <div>
     <div className="quirky-event-container">
       <h2 className="event-details-heading">Event Details</h2>
       <br />
@@ -246,7 +253,7 @@ const viewEvent = () => {
           width="200"
         />
       )}
-      <br />
+      <br /><br/>
       <h3 className="funky-title">Title: {data.title}</h3>
       <p className="funky-description">Description: {data.description}</p>
       <p className="additional-info">Organizer Email: {additionalInfo.organizerEmail}</p>
@@ -407,6 +414,53 @@ const viewEvent = () => {
         </div>
       )}
     </div>
+
+    
+
+    <Toast
+        show={showSuccessfulRegistrationToast}
+        onClose={() => setShowSuccessfulRegistrationToast(false)}
+        style={{
+          position: "fixed",
+          top: "15%", // Position at the vertical center
+          left: "50%", // Position at the horizontal center
+          transform: "translate(-50%, -50%)", // Center the toast
+          zIndex: 1,
+          width: "40%", // Increase width for a bigger appearance
+          maxWidth: "none",
+          margin: 0,
+          borderRadius: 8, // Increase border-radius for a rounded appearance
+          backgroundColor: "#2e2e2f",
+          padding: "20px", // Increase padding for more space
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Increase box shadow for depth
+          color: "aliceblue",
+          fontSize: "1.2rem", // Increase font size for better readability
+          display: "flex", // Use flexbox layout
+          flexDirection: "column", // Arrange children in a column
+          alignItems: "flex-start",
+          "@media (max-width: 576px)": {
+            width: "90%", // Adjust width for smaller screens
+            padding: "10px", // Adjust padding for smaller screens
+            top: "30%",
+            fontSize: "1rem", // Adjust font size for smaller screens
+          },
+        }}
+      >
+        <Toast.Header closeButton={false}>
+          <strong className="me-auto">EventSphere</strong>
+        </Toast.Header>
+        <Toast.Body>{registrationMessage}</Toast.Body>
+        <div style={{ marginTop: "10px" }}>
+          <Button
+            variant="primary"
+            onClick={() => setShowSuccessfulRegistrationToast(false)}
+          >
+            OK
+          </Button>
+        </div>
+      </Toast>
+</div>
+      <Footer/>
     </>
   );
 };

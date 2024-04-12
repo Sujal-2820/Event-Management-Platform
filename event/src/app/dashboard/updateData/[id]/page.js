@@ -1,34 +1,41 @@
-'use client'
+"use client";
 // src/app/dashboard/updateData/[id]/page.js
 
-import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import axios from 'axios';
-import { imageDb } from '../../../../../firebase';
-import { getDownloadURL, listAll, uploadBytes, deleteObject, ref } from 'firebase/storage';
-import './updateData.css';
-import OrganizerNavbarComponent from '@/app/components/organizerNavbar/organizerNavbar';
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import axios from "axios";
+import { imageDb } from "../../../../../firebase";
+import {
+  getDownloadURL,
+  listAll,
+  uploadBytes,
+  deleteObject,
+  ref,
+} from "firebase/storage";
+import "./updateData.css";
+import OrganizerNavbarComponent from "@/app/components/organizerNavbar/organizerNavbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-
+import Toast from "react-bootstrap/Toast";
+import Button from "react-bootstrap/Button";
 
 const UpdateData = () => {
   const router = useRouter();
   const { id } = useParams();
+  const [showUpdateSuccessToast, setShowUpdateSuccessToast] = useState(false);
 
   const [img, setImg] = useState(null);
   const [data, setData] = useState({
-    title: '',
-    description: '',
-    imageUrl: '', // For storing image URL
+    title: "",
+    description: "",
+    imageUrl: "", // For storing image URL
     quizQuestions: [], // For storing quiz questions
-    timePerQuestion: '', // For storing time per question
-    minimumScore: '', // For storing minimum score
-    emailSubject: '', // For storing email subject
-    emailDescription: '', // For storing email description
-    eventDateTime: '', // For storing event date and time
-    eventLocation: '', // For storing event location
-    eventDomain: '',
+    timePerQuestion: "", // For storing time per question
+    minimumScore: "", // For storing minimum score
+    emailSubject: "", // For storing email subject
+    emailDescription: "", // For storing email description
+    eventDateTime: "", // For storing event date and time
+    eventLocation: "", // For storing event location
+    eventDomain: "",
   });
 
   const handleChange = (e) => {
@@ -43,14 +50,17 @@ const UpdateData = () => {
   useEffect(() => {
     if (!id) return;
 
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
 
     axios
-      .get(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      .get(
+        `https://event-management-platform.onrender.com/auth/dashboard/data/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      })
+      )
       .then(async (response) => {
         const fetchedData = response.data;
         console.log(fetchedData);
@@ -69,65 +79,81 @@ const UpdateData = () => {
 
         // Fetch and set image URL for the data
         const imgs = await listAll(ref(imageDb, `files/${id}`));
-        const urls = await Promise.all(imgs.items.map((val) => getDownloadURL(val)));
+        const urls = await Promise.all(
+          imgs.items.map((val) => getDownloadURL(val))
+        );
 
-        const imageUrl = urls.length > 0 ? urls[0] : ''; // Assuming there's only one image per data entry
+        const imageUrl = urls.length > 0 ? urls[0] : ""; // Assuming there's only one image per data entry
         setData((prevData) => ({ ...prevData, imageUrl }));
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       });
   }, [id]);
 
   const handleEdit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
 
     try {
       if (img) {
         // Delete the existing image in Firebase Storage before uploading the new one
-        const userDataResponse = await axios.get(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-    
+        const userDataResponse = await axios.get(
+          `https://event-management-platform.onrender.com/auth/dashboard/data/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
         const userData = userDataResponse.data;
-    
-        if (!userData || !userData._id || !userData.imageUrl || userData.imageUrl.length === 0) {
-          throw new Error('UserData not found or _id missing');
+
+        if (
+          !userData ||
+          !userData._id ||
+          !userData.imageUrl ||
+          userData.imageUrl.length === 0
+        ) {
+          throw new Error("UserData not found or _id missing");
         }
-    
+
         const dataId = userData._id;
         const imageID = userData.imageUrl[0];
         const imagePath = `files/${dataId}/${imageID}`; // Adjust the path to suit your structure
-    
+
         const imageRef = ref(imageDb, imagePath);
-    
+
         // Delete the existing image file from Firebase Storage
         await deleteObject(imageRef);
-    
+
         // Upload new image if provided
         const imgRef = ref(imageDb, `files/${id}/${img.name}`);
         await uploadBytes(imgRef, img);
         const imageName = img.name; // Get the image name only
-    
+
         // Update data with new image name
         setData((prevData) => ({ ...prevData, imageUrl: [imageName] }));
       }
 
       // Update title, description, and imageUrl in MongoDB
-      await axios.put(`https://event-management-platform.onrender.com/auth/dashboard/data/${id}`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      await axios.put(
+        `https://event-management-platform.onrender.com/auth/dashboard/data/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
-      window.alert('Data Updated Successfully');
-      router.push('/dashboard');
+      setShowUpdateSuccessToast(true);
+      setTimeout(() => {
+        router.push('/dashboard'); // Redirect to the dashboard after 5 seconds
+      }, 5000);
     } catch (error) {
-      console.error('Error updating data:', error);
+      console.error("Error updating data:", error);
     }
   };
 
@@ -165,170 +191,241 @@ const UpdateData = () => {
   };
 
   const handleTimePerQuestionChange = (e) => {
-    const { value } = e.target;  
+    const { value } = e.target;
     setData((prevData) => ({
-      ...prevData, timePerQuestion: value }));
+      ...prevData,
+      timePerQuestion: value,
+    }));
   };
-  
+
   const handleMinimumScoreChange = (e) => {
     const { value } = e.target;
     setData((prevData) => ({
-      ...prevData, minimumScore: value }));
+      ...prevData,
+      minimumScore: value,
+    }));
   };
 
   const handleEventDomainChange = (e) => {
     const { value } = e.target;
     setData((prevData) => ({
-      ...prevData, eventDomain: value }));
+      ...prevData,
+      eventDomain: value,
+    }));
   };
 
   return (
     <>
-    <OrganizerNavbarComponent/>
-    <br/>
-    <div className="edit-data-container">
-      <h2>Edit Data</h2>
+      <OrganizerNavbarComponent />
       <br />
-      <form onSubmit={handleEdit}>
-        <input
-          type="text"
-          name="title"
-          value={data.title}
-          onChange={handleChange}
-          required
-          className="form-control mb-3"
-        />
-        <textarea
-          name="description"
-          value={data.description}
-          onChange={handleChange}
-          required
-          className="form-control mb-3"
-        ></textarea>
-        <h3>Current Image: </h3>
-        <br/>
-        {data.imageUrl && <img src={data.imageUrl} alt="Data Image" height="200" width="200" />}
+      <div className="edit-data-container">
+        <h2>Edit Data</h2>
         <br />
-        <br />
-        <div>
-          <label>Upload new Image:</label>
-          <input type="file" onChange={handleImageChange} className="form-control mb-3" />
-        </div>
-        
-        {/* Quiz Questions Section */}
-        <h3>Quiz Questions</h3>
-        {data.quizQuestions.map((question, index) => (
-          <div key={index}>
-            <label>{`Question ${index + 1}:`}</label>
-            <input
-              type="text"
-              value={question.questionText}
-              onChange={(e) => handleQuizChange(index, 'questionText', e.target.value)}
-              required
-              className="form-control mb-3"
+        <form onSubmit={handleEdit}>
+          <input
+            type="text"
+            name="title"
+            value={data.title}
+            onChange={handleChange}
+            required
+            className="form-control mb-3"
+          />
+          <textarea
+            name="description"
+            value={data.description}
+            onChange={handleChange}
+            required
+            className="form-control mb-3"
+          ></textarea>
+          <h3>Current Image: </h3>
+          <br />
+          {data.imageUrl && (
+            <img
+              src={data.imageUrl}
+              alt="Data Image"
+              height="200"
+              width="200"
             />
-            {/* Remove Question button */}
-            <button type="button" onClick={() => removeQuestion(index)} className="btn btn-danger mb-3">
-              Remove Question
-            </button>
-
-            {/* Input fields for options */}
-            {[0, 1, 2, 3].map((optionIndex) => (
-              <input
-                key={optionIndex}
-                type="text"
-                value={question.options[optionIndex].text}
-                onChange={(e) => handleOptionChange(index, optionIndex, e.target.value)}
-                placeholder={`Option ${optionIndex + 1}`}
-                className="form-control mb-3"
-              />
-            ))}
-
-            {/* Input field for correct option */}
-            <label>{`Correct Option for Question ${index + 1}:`}</label>
+          )}
+          <br />
+          <br />
+          <div>
+            <label>Upload new Image:</label>
             <input
-              type="text"
-              value={question.correctOption}
-              onChange={(e) => handleCorrectOptionChange(index, e.target.value)}
-              placeholder={`Correct Option (1-4)`}
+              type="file"
+              onChange={handleImageChange}
               className="form-control mb-3"
             />
           </div>
-        ))}
-        <br />
 
-        <label>Time Per Question: </label>
-        <input
-          type="text"
-          name="timePerQuestion"
-          value={data.timePerQuestion}
-          onChange={handleTimePerQuestionChange}
-          required
-          className="form-control mb-3"
-        />
+          {/* Quiz Questions Section */}
+          <h3>Quiz Questions</h3>
+          {data.quizQuestions.map((question, index) => (
+            <div key={index}>
+              <label>{`Question ${index + 1}:`}</label>
+              <input
+                type="text"
+                value={question.questionText}
+                onChange={(e) =>
+                  handleQuizChange(index, "questionText", e.target.value)
+                }
+                required
+                className="form-control mb-3"
+              />
+              {/* Remove Question button */}
+              <button
+                type="button"
+                onClick={() => removeQuestion(index)}
+                className="btn btn-danger mb-3"
+              >
+                Remove Question
+              </button>
 
-        <label>Minimum Score : </label>
-        <input
-          type="text"
-          name="minimumScore"
-          value={data.minimumScore}
-          onChange={handleMinimumScoreChange}
-          required
-          className="form-control mb-3"
-        />
+              {/* Input fields for options */}
+              {[0, 1, 2, 3].map((optionIndex) => (
+                <input
+                  key={optionIndex}
+                  type="text"
+                  value={question.options[optionIndex].text}
+                  onChange={(e) =>
+                    handleOptionChange(index, optionIndex, e.target.value)
+                  }
+                  placeholder={`Option ${optionIndex + 1}`}
+                  className="form-control mb-3"
+                />
+              ))}
 
-        <label>Event Domain: </label>
-        <input
-          type="text"
-          name="eventDomain"
-          value={data.eventDomain}
-          onChange={handleEventDomainChange}
-          required
-          className="form-control mb-3"
-        />
+              {/* Input field for correct option */}
+              <label>{`Correct Option for Question ${index + 1}:`}</label>
+              <input
+                type="text"
+                value={question.correctOption}
+                onChange={(e) =>
+                  handleCorrectOptionChange(index, e.target.value)
+                }
+                placeholder={`Correct Option (1-4)`}
+                className="form-control mb-3"
+              />
+            </div>
+          ))}
+          <br />
 
-        {/* Email Information Section */}
-        <h3>Email Information</h3>
-        <label>Email Subject:</label>
-        <input
-          type="text"
-          name="emailSubject"
-          value={data.emailSubject}
-          onChange={handleChange}
-          required
-          className="form-control mb-3"
-        />
-        <label>Email Description:</label>
-        <textarea
-          name="emailDescription"
-          value={data.emailDescription}
-          onChange={handleChange}
-          required
-          className="form-control mb-3"
-        ></textarea>
-        <label>Event Date & Time:</label>
-        <input
-          type="datetime-local"
-          name="eventDateTime"
-          value={data.eventDateTime}
-          onChange={handleChange}
-          required
-          className="form-control mb-3"
-        />
-        <label>Event Location:</label>
-        <input
-          type="text"
-          name="eventLocation"
-          value={data.eventLocation}
-          onChange={handleChange}
-          required
-          className="form-control mb-3"
-        />
+          <label>Time Per Question: </label>
+          <input
+            type="text"
+            name="timePerQuestion"
+            value={data.timePerQuestion}
+            onChange={handleTimePerQuestionChange}
+            required
+            className="form-control mb-3"
+          />
 
-        {/* Button to add a new question set */}
-        <button type="submit" className="btn btn-primary">Edit</button>
-      </form>
-    </div>
+          <label>Minimum Score : </label>
+          <input
+            type="text"
+            name="minimumScore"
+            value={data.minimumScore}
+            onChange={handleMinimumScoreChange}
+            required
+            className="form-control mb-3"
+          />
+
+          <label>Event Domain: </label>
+          <input
+            type="text"
+            name="eventDomain"
+            value={data.eventDomain}
+            onChange={handleEventDomainChange}
+            required
+            className="form-control mb-3"
+          />
+
+          {/* Email Information Section */}
+          <h3>Email Information</h3>
+          <label>Email Subject:</label>
+          <input
+            type="text"
+            name="emailSubject"
+            value={data.emailSubject}
+            onChange={handleChange}
+            required
+            className="form-control mb-3"
+          />
+          <label>Email Description:</label>
+          <textarea
+            name="emailDescription"
+            value={data.emailDescription}
+            onChange={handleChange}
+            required
+            className="form-control mb-3"
+          ></textarea>
+          <label>Event Date & Time:</label>
+          <input
+            type="datetime-local"
+            name="eventDateTime"
+            value={data.eventDateTime}
+            onChange={handleChange}
+            required
+            className="form-control mb-3"
+          />
+          <label>Event Location:</label>
+          <input
+            type="text"
+            name="eventLocation"
+            value={data.eventLocation}
+            onChange={handleChange}
+            required
+            className="form-control mb-3"
+          />
+
+          {/* Button to add a new question set */}
+          <button type="submit" className="btn btn-primary">
+            Edit
+          </button>
+        </form>
+      </div>
+      <Toast
+        show={showUpdateSuccessToast}
+        onClose={() => setShowUpdateSuccessToast(false)}
+        style={{
+          position: "fixed",
+          top: "15%", // Position at the vertical center
+          left: "50%", // Position at the horizontal center
+          transform: "translate(-50%, -50%)", // Center the toast
+          zIndex: 1,
+          width: "40%", // Increase width for a bigger appearance
+          maxWidth: "none",
+          margin: 0,
+          borderRadius: 8, // Increase border-radius for a rounded appearance
+          backgroundColor: "#2e2e2f",
+          padding: "20px", // Increase padding for more space
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Increase box shadow for depth
+          color: "aliceblue",
+          fontSize: "1.2rem", // Increase font size for better readability
+          display: "flex", // Use flexbox layout
+          flexDirection: "column", // Arrange children in a column
+          alignItems: "flex-start",
+          "@media (max-width: 576px)": {
+            width: "90%", // Adjust width for smaller screens
+            padding: "10px", // Adjust padding for smaller screens
+            top: "30%",
+            fontSize: "1rem", // Adjust font size for smaller screens
+          },
+        }}
+      >
+        <Toast.Header closeButton={false}>
+          <strong className="me-auto">EventSphere</strong>
+        </Toast.Header>
+        <Toast.Body>Data Updated Successfully!</Toast.Body>
+        <div style={{ marginTop: "10px" }}>
+          <Button
+            variant="primary"
+            onClick={() => setShowUpdateSuccessToast(false)}
+          >
+            OK
+          </Button>
+        </div>
+      </Toast>
     </>
   );
 };

@@ -51,7 +51,7 @@ function AttendeeNavbarComponent() {
               <i className="fas fa-home"></i> Home
             </Nav.Link>
             <Nav.Link onClick={directToDashbaord}>
-            <i class="fa fa-list-alt" aria-hidden="true"></i> Dashboard
+            <i className="fa fa-list-alt" aria-hidden="true"></i> Dashboard
             </Nav.Link>
             <Nav.Link onClick={directToShowRegisteredEvents}>
               <i className="fas fa-check-square"></i> Registered Events

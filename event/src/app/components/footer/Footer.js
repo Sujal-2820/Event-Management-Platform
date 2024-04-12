@@ -54,7 +54,7 @@ function Footer() {
       </div>
 
       <div className="footer-row footer-copyright">
-        <p>Copyright &copy; 2024 Brand Name | All Rights Reserved</p>
+        <p>Copyright &copy; 2024 EventSphere | All Rights Reserved</p>
       </div>
     </footer>
   );

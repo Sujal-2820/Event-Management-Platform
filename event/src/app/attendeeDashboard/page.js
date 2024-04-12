@@ -6,10 +6,9 @@ import axios from "axios";
 import { imageDb } from "../../../firebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import "./attendeeDashboard.css";
-import NavbarComponent from "../components/navbar/navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import eventsLoading from "./eventsLoading";
 import AttendeeNavbarComponent from "../components/attendeeNavbar/attendeeNavbar";
+import Footer from "../components/footer/Footer";
 
 
 const AttendeeDashboard = () => {
@@ -130,18 +129,10 @@ const AttendeeDashboard = () => {
           </ul>
         </div>
 
-        <button
-          className="registered-events-button"
-          onClick={() => router.push("/attendeeDashboard/registeredEvents/")}
-        >
-          View Registered Events
-        </button>
-        <br />
-        <button className="sign-out-button" onClick={handleSignOut}>
-          Sign Out
-        </button>
       </div>
       {loading && <eventsLoading />}
+
+      <Footer/>
     </>
   );
 };

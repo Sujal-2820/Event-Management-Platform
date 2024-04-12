@@ -11,7 +11,8 @@ import LoadingPopup from "./LoadingPopup.js";
 import "./addData.css";
 import OrganizerNavbarComponent from "@/app/components/organizerNavbar/organizerNavbar.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import Toast from "react-bootstrap/Toast";
+import Button from "react-bootstrap/Button";
 
 function AddData() {
   const [title, setTitle] = useState("");
@@ -20,6 +21,10 @@ function AddData() {
   const [includeQuizQuestions, setIncludeQuizQuestions] = useState(false);
   const [timePerQuestion, setTimePerQuestion] = useState("");
   const [minimumScore, setMinimumScore] = useState("");
+
+  const [showEmailSentToast, setShowEmailSentToast] = useState(false);
+  const [showOtpVerifiedToast, setShowOtpVerifiedToast] = useState(false);
+  const [showDataSubmittedToast, setShowDataSubmittedToast] = useState(false);
 
   const [organizerEmail, setOrganizerEmail] = useState("");
   const [otp, setOtp] = useState("");
@@ -163,9 +168,7 @@ function AddData() {
         "https://event-management-platform.onrender.com/mailVerify/generate-otp",
         { email: organizerEmail }
       );
-      alert(
-        "An OTP has been sent to the Organizer's Email Id. Please check your email."
-      );
+      setShowEmailSentToast(true);
     } catch (error) {
       console.error("Error sending OTP:", error);
       alert("Error sending OTP. Please try again.");
@@ -180,7 +183,7 @@ function AddData() {
         { email: organizerEmail, otp }
       );
       setOtpVerified(true);
-      alert("OTP Verified Successfully!");
+      setShowOtpVerifiedToast(true);
     } catch (error) {
       console.error("Error verifying OTP:", error);
       alert(
@@ -264,7 +267,7 @@ function AddData() {
 
         console.log("MongoDB entry updated successfully.");
 
-        alert("Data submitted successfully!");
+        setShowDataSubmittedToast(true);
         router.push("/dashboard");
       } catch (error) {
         console.error("Error adding data:", error);
@@ -280,43 +283,55 @@ function AddData() {
     <div>
       <OrganizerNavbarComponent />
       <div className="container mt-5">
-      <h1 className="add-data-title">Add Data</h1>
-      <form onSubmit={handleSubmit} className="add-data-form row g-3">
-        <div className="col-md-6">
-          <label htmlFor="title" className="add-data-title-label form-label">Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={handleTitleChange}
-            required
-            className="add-data-title-input form-control"
-            id="title"
-          />
-        </div>
-        <div className="col-md-6">
-          <label htmlFor="description" className="add-data-description-label form-label">Description:</label>
-          <input
-            type="text"
-            value={description}
-            onChange={handleDescriptionChange}
-            required
-            className="add-data-description-input form-control"
-            id="description"
-          />
-        </div>
-        <div className="col-12">
-          <label htmlFor="eventDomain" className="add-data-domain-label form-label">Select Event Domain:</label>
-          <select
-            className="add-data-domain-select form-select"
-            value={eventDomain}
-            onChange={handleEventDomainChange}
-            required
-            id="eventDomain"
-          >
-            <option value="">Select Event Domain</option>
-            <option value="Technology">Technology</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Medical/Healthcare">Medical/Healthcare</option>
+        <h1 className="add-data-title">Add Data</h1>
+        <form onSubmit={handleSubmit} className="add-data-form row g-3">
+          <div className="col-md-6">
+            <label htmlFor="title" className="add-data-title-label form-label">
+              Title:
+            </label>
+            <input
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              required
+              className="add-data-title-input form-control"
+              id="title"
+            />
+          </div>
+          <div className="col-md-6">
+            <label
+              htmlFor="description"
+              className="add-data-description-label form-label"
+            >
+              Description:
+            </label>
+            <input
+              type="text"
+              value={description}
+              onChange={handleDescriptionChange}
+              required
+              className="add-data-description-input form-control"
+              id="description"
+            />
+          </div>
+          <div className="col-12">
+            <label
+              htmlFor="eventDomain"
+              className="add-data-domain-label form-label"
+            >
+              Select Event Domain:
+            </label>
+            <select
+              className="add-data-domain-select form-select"
+              value={eventDomain}
+              onChange={handleEventDomainChange}
+              required
+              id="eventDomain"
+            >
+              <option value="">Select Event Domain</option>
+              <option value="Technology">Technology</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Medical/Healthcare">Medical/Healthcare</option>
               <option value="Business/Entrepreneurship">
                 Business/Entrepreneurship
               </option>
@@ -342,174 +357,375 @@ function AddData() {
               <option value="Diversity and Inclusion">
                 Diversity and Inclusion
               </option>
-            {/* Add other options here */}
-          </select>
-        </div>
-        <div className="col-12">
-          <label htmlFor="image" className="add-data-image-label form-label">Image:</label>
-          <input
-            type="file"
-            onChange={handleImageChange}
-            className="add-data-image-input form-control"
-            id="image"
-          />
-        </div>
-
-        <div className="col-12">
-          <label className="add-data-include-label form-check-label">Include Quiz Questions:</label>
-          <input
-            type="checkbox"
-            checked={includeQuizQuestions}
-            onChange={handleCheckboxChange}
-            className="add-data-include-checkbox form-check-input"
-            id="includeQuizQuestions"
-          />
-        </div>
-
-        {includeQuizQuestions && (
+              {/* Add other options here */}
+            </select>
+          </div>
           <div className="col-12">
-            <h2 className="add-data-quiz-title">Quiz Questions</h2>
-            {questionSets.map((questionSet, index) => (
-              <div key={index}>
-                <h3 className="add-data-question-title">Question {index + 1}</h3>
-                <div>
-                  {errorMessages[index] && (
-                    <p className="add-data-error-message">{errorMessages[index]}</p>
-                  )}
+            <label htmlFor="image" className="add-data-image-label form-label">
+              Image:
+            </label>
+            <input
+              type="file"
+              onChange={handleImageChange}
+              className="add-data-image-input form-control"
+              id="image"
+            />
+          </div>
+
+          <div className="col-12">
+            <label className="add-data-include-label form-check-label">
+              Include Quiz Questions:
+            </label>
+            <input
+              type="checkbox"
+              checked={includeQuizQuestions}
+              onChange={handleCheckboxChange}
+              className="add-data-include-checkbox form-check-input"
+              id="includeQuizQuestions"
+            />
+          </div>
+
+          {includeQuizQuestions && (
+            <div className="col-12">
+              <h2 className="add-data-quiz-title">Quiz Questions</h2>
+              {questionSets.map((questionSet, index) => (
+                <div key={index}>
+                  <h3 className="add-data-question-title">
+                    Question {index + 1}
+                  </h3>
                   <div>
-                  <input
-                    type="text"
-                    placeholder="Question"
-                    value={questionSet.questionText}
-                    onChange={(event) => handleQuestionChange(index, event)}
-                    className="add-data-question-input form-control"
-                  />
-                  <button className="X-button btn btn-danger" onClick={() => deleteQuestion(index)}>X</button>
-                
+                    {errorMessages[index] && (
+                      <p className="add-data-error-message">
+                        {errorMessages[index]}
+                      </p>
+                    )}
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Question"
+                        value={questionSet.questionText}
+                        onChange={(event) => handleQuestionChange(index, event)}
+                        className="add-data-question-input form-control"
+                      />
+                      <button
+                        className="X-button btn btn-danger"
+                        onClick={() => deleteQuestion(index)}
+                      >
+                        X
+                      </button>
+                    </div>
                   </div>
-                  </div>
-                {questionSet.options.map((option, optionIndex) => (
-                  <div key={optionIndex}>
+                  {questionSet.options.map((option, optionIndex) => (
+                    <div key={optionIndex}>
+                      <input
+                        type="text"
+                        placeholder={`Option ${optionIndex + 1}`}
+                        value={option.text}
+                        onChange={(event) =>
+                          handleOptionChange(index, optionIndex, event)
+                        }
+                        className="add-data-option-input form-control"
+                      />
+                    </div>
+                  ))}
+                  <div>
                     <input
                       type="text"
-                      placeholder={`Option ${optionIndex + 1}`}
-                      value={option.text}
-                      onChange={(event) => handleOptionChange(index, optionIndex, event)}
-                      className="add-data-option-input form-control"
+                      placeholder="Correct Option"
+                      value={questionSet.correctOption}
+                      onChange={(event) =>
+                        handleCorrectOptionChange(index, event)
+                      }
+                      className="add-data-correct-option-input form-control"
                     />
                   </div>
-                ))}
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Correct Option"
-                    value={questionSet.correctOption}
-                    onChange={(event) => handleCorrectOptionChange(index, event)}
-                    className="add-data-correct-option-input form-control"
-                  />
                 </div>
+              ))}
+              <div>
+                <button
+                  onClick={addQuestion}
+                  className="add-data-add-question-button btn btn-primary"
+                >
+                  Add Question
+                </button>
               </div>
-            ))}
-            <div>
-              <button onClick={addQuestion} className="add-data-add-question-button btn btn-primary">Add Question</button>
+              <div>
+                <label className="add-data-time-per-question-label form-label">
+                  Time per question in Seconds:
+                </label>
+                <input
+                  type="text"
+                  value={timePerQuestion}
+                  onChange={handleTimePerQuestionChange}
+                  className="add-data-time-per-question-input form-control"
+                />
+              </div>
+              <div>
+                <label className="add-data-minimum-score-label form-label">
+                  Minimum Number of Correct Questions to be eligible for the
+                  Event:
+                </label>
+                <input
+                  type="text"
+                  value={minimumScore}
+                  onChange={handleMinimumScoreChange}
+                  className="add-data-minimum-score-input form-control"
+                />
+              </div>
             </div>
-            <div>
-              <label className="add-data-time-per-question-label form-label">Time per question in Seconds:</label>
-              <input
-                type="text"
-                value={timePerQuestion}
-                onChange={handleTimePerQuestionChange}
-                className="add-data-time-per-question-input form-control"
-              />
-            </div>
-            <div>
-              <label className="add-data-minimum-score-label form-label">Minimum Number of Correct Questions to be eligible for the Event:</label>
-              <input
-                type="text"
-                value={minimumScore}
-                onChange={handleMinimumScoreChange}
-                className="add-data-minimum-score-input form-control"
-              />
-            </div>
-          </div>
-        )}
+          )}
 
-        <div className="col-12 Email-Inputs">
-          <div>
-            <p className="add-data-warning-note">NOTE: You won't be able to change Organizer's Email after creating this event. Enter it carefully!!</p>
-            <label htmlFor="organizerEmail" className="add-data-organizer-email-label form-label">Organizer's Email:</label>
-            <input
-              type="email"
-              value={organizerEmail}
-              onChange={handleOrganizerEmailChange}
-              required
-              className="add-data-organizer-email-input form-control"
-              id="organizerEmail"
-            />
-            <button type="button" onClick={handleSendOtp} className="add-data-send-otp-button btn btn-primary">Send OTP</button>
+          <div className="col-12 Email-Inputs">
+            <div>
+              <p className="add-data-warning-note">
+                NOTE: You won't be able to change Organizer's Email after
+                creating this event. Enter it carefully!!
+              </p>
+              <label
+                htmlFor="organizerEmail"
+                className="add-data-organizer-email-label form-label"
+              >
+                Organizer's Email:
+              </label>
+              <input
+                type="email"
+                value={organizerEmail}
+                onChange={handleOrganizerEmailChange}
+                required
+                className="add-data-organizer-email-input form-control"
+                id="organizerEmail"
+              />
+              <button
+                type="button"
+                onClick={handleSendOtp}
+                className="add-data-send-otp-button btn btn-primary"
+              >
+                Send OTP
+              </button>
+            </div>
+            <div>
+              <label htmlFor="otp" className="add-data-otp-label form-label">
+                Enter OTP:
+              </label>
+              <input
+                type="text"
+                value={otp}
+                onChange={handleOtpChange}
+                required
+                className="add-data-otp-input form-control"
+                id="otp"
+              />
+              <button
+                type="button"
+                onClick={handleVerifyOtp}
+                className="add-data-verify-otp-button btn btn-primary"
+              >
+                Verify OTP
+              </button>
+            </div>
+            <div>
+              <label
+                htmlFor="emailSubject"
+                className="add-data-email-subject-label form-label"
+              >
+                Email Subject:
+              </label>
+              <input
+                type="text"
+                value={emailSubject}
+                onChange={handleEmailSubjectChange}
+                required
+                className="add-data-email-subject-input form-control"
+                id="emailSubject"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="emailDescription"
+                className="add-data-email-description-label form-label"
+              >
+                Email Description:
+              </label>
+              <input
+                type="text"
+                value={emailDescription}
+                onChange={handleEmailDescriptionChange}
+                required
+                className="add-data-email-description-input form-control"
+                id="emailDescription"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="eventDateTime"
+                className="add-data-event-datetime-label form-label"
+              >
+                Event Date & Time:
+              </label>
+              <input
+                type="datetime-local"
+                value={eventDateTime}
+                onChange={handleEventDateTimeChange}
+                required
+                className="add-data-event-datetime-input form-control"
+                id="eventDateTime"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="eventLocation"
+                className="add-data-event-location-label form-label"
+              >
+                Event Location:
+              </label>
+              <input
+                type="text"
+                value={eventLocation}
+                onChange={handleEventLocationChange}
+                required
+                className="add-data-event-location-input form-control"
+                id="eventLocation"
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="otp" className="add-data-otp-label form-label">Enter OTP:</label>
-            <input
-              type="text"
-              value={otp}
-              onChange={handleOtpChange}
-              required
-              className="add-data-otp-input form-control"
-              id="otp"
-            />
-            <button type="button" onClick={handleVerifyOtp} className="add-data-verify-otp-button btn btn-primary">Verify OTP</button>
+          <div className="col-12">
+            <button
+              type="submit"
+              className="add-data-submit-button btn btn-primary"
+            >
+              Submit Data
+            </button>
           </div>
-          <div>
-            <label htmlFor="emailSubject" className="add-data-email-subject-label form-label">Email Subject:</label>
-            <input
-              type="text"
-              value={emailSubject}
-              onChange={handleEmailSubjectChange}
-              required
-              className="add-data-email-subject-input form-control"
-              id="emailSubject"
-            />
-          </div>
-          <div>
-            <label htmlFor="emailDescription" className="add-data-email-description-label form-label">Email Description:</label>
-            <input
-              type="text"
-              value={emailDescription}
-              onChange={handleEmailDescriptionChange}
-              required
-              className="add-data-email-description-input form-control"
-              id="emailDescription"
-            />
-          </div>
-          <div>
-            <label htmlFor="eventDateTime" className="add-data-event-datetime-label form-label">Event Date & Time:</label>
-            <input
-              type="datetime-local"
-              value={eventDateTime}
-              onChange={handleEventDateTimeChange}
-              required
-              className="add-data-event-datetime-input form-control"
-              id="eventDateTime"
-            />
-          </div>
-          <div>
-            <label htmlFor="eventLocation" className="add-data-event-location-label form-label">Event Location:</label>
-            <input
-              type="text"
-              value={eventLocation}
-              onChange={handleEventLocationChange}
-              required
-              className="add-data-event-location-input form-control"
-              id="eventLocation"
-            />
-          </div>
+        </form>
+      </div>
+
+      <Toast
+        show={showEmailSentToast}
+        onClose={() => setShowEmailSentToast(false)}
+        style={{
+          position: "fixed",
+          top: "15%", // Position at the vertical center
+          left: "50%", // Position at the horizontal center
+          transform: "translate(-50%, -50%)", // Center the toast
+          zIndex: 1,
+          width: "40%", // Increase width for a bigger appearance
+          maxWidth: "none",
+          margin: 0,
+          borderRadius: 8, // Increase border-radius for a rounded appearance
+          backgroundColor: "#2e2e2f",
+          padding: "20px", // Increase padding for more space
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Increase box shadow for depth
+          color: "aliceblue",
+          fontSize: "1.2rem", // Increase font size for better readability
+          display: "flex", // Use flexbox layout
+          flexDirection: "column", // Arrange children in a column
+          alignItems: "flex-start", // Align children to the start (left)
+          "@media (max-width: 576px)": {
+            width: "90%", // Adjust width for smaller screens
+            padding: "10px", // Adjust padding for smaller screens
+            top: "30%",
+            fontSize: "1rem", // Adjust font size for smaller screens
+          },
+        }}
+      >
+        <Toast.Header closeButton={false}>
+          <strong className="me-auto">EventSphere</strong>
+        </Toast.Header>
+        <Toast.Body>
+          An OTP has been sent to the Organizer's Email Id. Please check your
+          email.
+        </Toast.Body>
+        <div style={{ marginTop: "10px" }}>
+          <Button
+            variant="primary"
+            onClick={() => setShowEmailSentToast(false)}
+          >
+            OK
+          </Button>
         </div>
-        <div className="col-12">
-          <button type="submit" className="add-data-submit-button btn btn-primary">Submit Data</button>
-        </div>
-      </form>
-    </div>
+      </Toast>
+
+      <Toast
+        show={showOtpVerifiedToast}
+        onClose={() => setShowOtpVerifiedToast(false)}
+        style={{
+          position: "fixed",
+          top: "15%", // Position at the vertical center
+          left: "50%", // Position at the horizontal center
+          transform: "translate(-50%, -50%)", // Center the toast
+          zIndex: 1,
+          width: "40%", // Increase width for a bigger appearance
+          maxWidth: "none",
+          margin: 0,
+          borderRadius: 8, // Increase border-radius for a rounded appearance
+          backgroundColor: "#2e2e2f",
+          padding: "20px", // Increase padding for more space
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Increase box shadow for depth
+          color: "aliceblue",
+          fontSize: "1.2rem", // Increase font size for better readability
+          display: "flex", // Use flexbox layout
+          flexDirection: "column", // Arrange children in a column
+          alignItems: "flex-start",
+          "@media (max-width: 576px)": {
+            width: "90%", // Adjust width for smaller screens
+            padding: "10px", // Adjust padding for smaller screens
+            top: "30%",
+            fontSize: "1rem", // Adjust font size for smaller screens
+          },
+        }}
+      >
+        <Toast.Header closeButton={false}>
+          <strong className="me-auto">EventSphere</strong>
+        </Toast.Header>
+        <Toast.Body>OTP Verified Successfully!</Toast.Body>
+        <Button
+          variant="primary"
+          onClick={() => setShowOtpVerifiedToast(false)}
+        >
+          OK
+        </Button>
+      </Toast>
+
+      <Toast
+        show={showDataSubmittedToast}
+        onClose={() => setShowDataSubmittedToast(false)}
+        style={{
+          position: "fixed",
+          top: "15%", // Position at the vertical center
+          left: "50%", // Position at the horizontal center
+          transform: "translate(-50%, -50%)", // Center the toast
+          zIndex: 1,
+          width: "40%", // Increase width for a bigger appearance
+          maxWidth: "none",
+          margin: 0,
+          borderRadius: 8, // Increase border-radius for a rounded appearance
+          backgroundColor: "#2e2e2f",
+          padding: "20px", // Increase padding for more space
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Increase box shadow for depth
+          color: "aliceblue",
+          fontSize: "1.2rem", // Increase font size for better readability
+          display: "flex", // Use flexbox layout
+          flexDirection: "column", // Arrange children in a column
+          alignItems: "flex-start",
+          "@media (max-width: 576px)": {
+            width: "90%", // Adjust width for smaller screens
+            padding: "10px", // Adjust padding for smaller screens
+            top: "30%",
+            fontSize: "1rem", // Adjust font size for smaller screens
+          },
+        }}
+      >
+        <Toast.Header closeButton={false}>
+          <strong className="me-auto">EventSphere</strong>
+        </Toast.Header>
+        <Toast.Body>Data submitted successfully!</Toast.Body>
+        <Button
+          variant="primary"
+          onClick={() => setShowDataSubmittedToast(false)}
+        >
+          OK
+        </Button>
+      </Toast>
 
       {/* Loading Popup */}
       {loading && <LoadingPopup />}

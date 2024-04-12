@@ -14,6 +14,7 @@ import HeaderComponent from './components/header/HeaderComponent';
 
 
 const Home = () => {
+  
   return (
     <>
       <NavbarComponent/>

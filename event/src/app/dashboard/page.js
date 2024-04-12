@@ -9,6 +9,9 @@ import "./dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import OrganizerNavbarComponent from "../components/organizerNavbar/organizerNavbar";
 import contentLoading from "./contentLoading";
+import Toast from "react-bootstrap/Toast";
+import Button from "react-bootstrap/Button";
+
 
 const Dashboard = () => {
   const router = useRouter();
@@ -17,6 +20,7 @@ const Dashboard = () => {
   const [storedEmail, setStoredEmail] = useState("");
   const [userType, setUserType] = useState("");
   const [userEntries, setUserEntries] = useState([]);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,7 +91,7 @@ const Dashboard = () => {
       setUserEntries((prevEntries) =>
         prevEntries.filter((entry) => entry._id !== id)
       );
-      alert("Data Deleted Successfully!!");
+      setShowToast(true);
     } catch (error) {
       console.error("Error deleting data:", error);
     }
@@ -124,7 +128,7 @@ const Dashboard = () => {
 
         <div className="row">
           {userEntries.map((item, index) => (
-            <div className="col-md-6 mb-4" key={index}>
+            <div className="col-lg-4 col-md-6 mb-4" key={index}>
               <div className="card h-100">
                 {item.imageUrl && (
                   <img
@@ -170,6 +174,32 @@ const Dashboard = () => {
       </div>
     </div>
     {loading && <contentLoading />}
+    <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1,
+          backgroundColor: "#2c3e50",
+          color: "aliceblue",
+          padding: "20px",
+          borderRadius: "8px",
+          fontSize: "1.2rem",
+        }}
+      >
+        <Toast.Header closeButton={false}>
+          <strong className="me-auto">EventSphere</strong>
+        </Toast.Header>
+        <Toast.Body>Data Deleted Successfully!!</Toast.Body>
+        <div style={{ marginTop: "10px" }}>
+          <Button variant="primary" onClick={() => setShowToast(false)}>
+            OK
+          </Button>
+        </div>
+      </Toast>
     </>
   );
 };

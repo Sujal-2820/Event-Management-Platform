@@ -127,7 +127,7 @@
   .add-data-add-question-button,
   .add-data-send-otp-button,
   .add-data-verify-otp-button {
-    width: 10%;
+    width: 30%;
     padding: 10px;
     margin-bottom: 15px;
     box-sizing: border-box;
