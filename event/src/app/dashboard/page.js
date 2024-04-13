@@ -8,9 +8,7 @@ import { getDownloadURL, listAll, ref, deleteObject } from "firebase/storage";
 import "./dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import OrganizerNavbarComponent from "../components/organizerNavbar/organizerNavbar";
-import contentLoading from "./contentLoading";
-import Toast from "react-bootstrap/Toast";
-import Button from "react-bootstrap/Button";
+import { Container, Row, Col, Card, Button, Toast } from "react-bootstrap";
 
 
 const Dashboard = () => {

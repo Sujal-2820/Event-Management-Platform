@@ -27,7 +27,7 @@
 }
 
 .unique-organizer-image{
-  width: 20px; 
+  width: 100%px; 
   height: auto;
   object-fit: cover;
 }
