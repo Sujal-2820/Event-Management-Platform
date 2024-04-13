@@ -27,7 +27,7 @@
 .add-data-email-description-input,
 .add-data-event-datetime-input,
 .add-data-event-location-input {
-  width: 50%;
+  width: 65%;
   padding: 10px;
   margin-bottom: 15px;
   box-sizing: border-box;
@@ -138,7 +138,7 @@
 
   .X-button {
     width: 20%;
-    padding: 10px;
+    padding: 5px;
     margin-bottom: 15px;
     box-sizing: border-box;
   }
