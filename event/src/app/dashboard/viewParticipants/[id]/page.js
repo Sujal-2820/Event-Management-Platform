@@ -44,9 +44,9 @@ const ViewParticipants = () => {
               <div className="card-body">
                 <h5 className="card-title participant-name">{participant.fullName}</h5>
                 <p className="card-text">
-                <i class="fa fa-github-alt"></i> <a href={participant.githubURL} target="_blank" rel="noreferrer">Github</a>
+                <a href={participant.githubURL} target="_blank" rel="noreferrer">Github</a>
                   <br />
-                  <i class="fa fa-linkedin"></i> <a href={participant.linkedinURL} target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href={participant.linkedinURL} target="_blank" rel="noreferrer">LinkedIn</a>
                 </p>
                 <a href="#" className="btn btn-primary check-in-button">Check In</a>
               </div>
