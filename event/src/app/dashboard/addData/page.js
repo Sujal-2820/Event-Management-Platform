@@ -376,6 +376,7 @@ function AddData() {
             <label className="add-data-include-label form-check-label">
               Include Quiz Questions:
             </label>
+            &nbsp;&nbsp;
             <input
               type="checkbox"
               checked={includeQuizQuestions}
