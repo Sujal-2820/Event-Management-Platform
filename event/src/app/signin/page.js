@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import "./signin.css";
 import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavbarComponent from "../components/navbar/navbar";
 
 const SignIn = () => {
   const router = useRouter();
@@ -71,6 +73,8 @@ const SignIn = () => {
   };
 
   return (
+    <>
+    <NavbarComponent/>
     <div className="container">
       <div className="user signinBox">
         <div className="formBox">
@@ -111,6 +115,7 @@ const SignIn = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

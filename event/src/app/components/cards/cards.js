@@ -38,7 +38,7 @@ function Cards() {
     setShowToast(true); // Show the toast
     setTimeout(() => {
       router.push("/signin");
-    }, 5000); // Redirect to signin page after 3 seconds
+    }, 4500); // Redirect to signin page after 3 seconds
   };
 
   return (
@@ -69,25 +69,7 @@ function Cards() {
       <Toast
         show={showToast}
         onClose={() => setShowToast(false)}
-        style={{
-          position: "fixed",
-          top: "15%", // Position at the vertical center
-          left: "50%", // Position at the horizontal center
-          transform: "translate(-50%, -50%)", // Center the toast
-          zIndex: 1,
-          width: "40%", // Increase width for a bigger appearance
-          maxWidth: "none",
-          margin: 0,
-          borderRadius: 8, // Increase border-radius for a rounded appearance
-          backgroundColor: "#2e2e2f",
-          padding: "20px", // Increase padding for more space
-          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Increase box shadow for depth
-          color: "aliceblue",
-          fontSize: "1.2rem", // Increase font size for better readability
-          display: "flex", // Use flexbox layout
-          flexDirection: "column", // Arrange children in a column
-          alignItems: "flex-start", // Align children to the start (left)
-        }}
+        className="custom-toast-message"
       >
         <Toast.Header closeButton={false}>
           <strong className="me-auto">EventSphere</strong>

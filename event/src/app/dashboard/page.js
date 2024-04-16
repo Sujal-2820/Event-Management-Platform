@@ -176,18 +176,7 @@ const Dashboard = () => {
     <Toast
         show={showToast}
         onClose={() => setShowToast(false)}
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 1,
-          backgroundColor: "#2c3e50",
-          color: "aliceblue",
-          padding: "20px",
-          borderRadius: "8px",
-          fontSize: "1.2rem",
-        }}
+        className="custom-toast-message-dashboard"
       >
         <Toast.Header closeButton={false}>
           <strong className="me-auto">EventSphere</strong>

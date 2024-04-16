@@ -176,10 +176,35 @@
   color: #fff;
 }
 
+.custom-toast-message-attendee-view-event{
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 40%;
+    max-width: none;
+    margin: 0;
+    border-radius: 8px;
+    background-color: #2e2e2f;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: aliceblue;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 /* Media Queries */
 
 @media only screen and (max-width: 768px) {
   .quirky-event-container {
     padding: 10px;
+  }
+
+  .custom-toast-message-attendee-view-event{
+      width: 60%;
+      top: 30%;
   }
 }

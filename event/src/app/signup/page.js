@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import "./signup.css";
 import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavbarComponent from "../components/navbar/navbar";
 
 const SignUp = () => {
   const router = useRouter();
@@ -41,6 +43,8 @@ const SignUp = () => {
   };
 
   return (
+    <>
+    <NavbarComponent/>
     <div className="container">
       <div className="user signupBox">
         <div className="formBox">
@@ -98,6 +102,7 @@ const SignUp = () => {
         <div className="imgBox">{/* Add image source here */}</div>
       </div>
     </div>
+    </>
   );
 };
 

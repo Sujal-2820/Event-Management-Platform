@@ -103,6 +103,26 @@
   border: 2px solid;
 }
 
+.custom-toast-message-add-data-page{
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 40%;
+  max-width: none;
+  margin: 0;
+  border-radius: 8px;
+  background-color: #2e2e2f;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  color: aliceblue;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 @media only screen and (max-width: 600px) {
   .add-data-form div {
     padding: 10px;
@@ -141,6 +161,11 @@
     padding: 5px;
     margin-bottom: 15px;
     box-sizing: border-box;
+  }
+
+  .custom-toast-message-add-data-page{
+    width: 60%;
+    top: 30%; 
   }
 }
 
