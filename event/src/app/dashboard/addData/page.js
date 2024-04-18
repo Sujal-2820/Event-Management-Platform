@@ -625,6 +625,7 @@ function AddData() {
       <Toast
         show={showOtpVerifiedToast}
         onClose={() => setShowOtpVerifiedToast(false)}
+        className="custom-toast-message-add-data-page"
       >
         <Toast.Header closeButton={false}>
           <strong className="me-auto">EventSphere</strong>
@@ -641,6 +642,7 @@ function AddData() {
       <Toast
         show={showDataSubmittedToast}
         onClose={() => setShowDataSubmittedToast(false)}
+        className="custom-toast-message-add-data-page"
       >
         <Toast.Header closeButton={false}>
           <strong className="me-auto">EventSphere</strong>
