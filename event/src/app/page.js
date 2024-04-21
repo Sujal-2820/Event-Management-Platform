@@ -20,8 +20,6 @@ const Home = () => {
       <NavbarComponent/>
       <HeaderComponent/>
       <br/>
-      <ImageCarousel/>
-      <br/>
       <Cards/>
       <br/>
       <Makers/>
