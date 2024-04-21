@@ -6,6 +6,8 @@
   background-color: #FCFDF2;
   box-shadow: 0 0 10px rgba(13, 13, 13, 0.5);
   border-radius: 10px; /* Added border-radius for a softer look */
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0;
 }
 
 /* Event details heading */
@@ -19,11 +21,20 @@
 .funky-title {
   color: #3B3486;
   font-weight: bold;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  font-size: 30px;
+  animation: fadeIn 1s ease-in-out forwards; /* Apply fade-in animation */
+  opacity: 0;
 }
 
 /* Funky description */
 .funky-description {
   color: #7743DB;
+  text-align: center;
+  font-size: 23px;
+  animation: fadeIn 1s ease-in-out forwards; /* Apply fade-in animation */
+  opacity: 0;
 }
 
 /* Unconventional image heading */
@@ -35,22 +46,26 @@
 
 /* Unique event image */
 .unique-event-image {
-  max-width: 100%;
+  max-width: 60%;
   height: auto;
-  margin-top: 10px;
+  display: block;
+  margin: 10px auto; /* Center the image horizontally */
   border-radius: 10px; /* Added border-radius for a softer look */
+  border: 2px dotted;
+  padding: 2px;
 }
 
 /* Quirky quiz button */
 .quirky-quiz-button {
+  display: block;
+  margin: 10px auto;
   background-color: #3B3486;
   color: #fff;
-  padding: 10px 20px; /* Increased padding for better button appearance */
+  padding: 15px 30px; /* Increased padding for better button appearance */
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px; /* Increased font size for better readability */
-  margin-top: 20px;
+  font-size: 20px; /* Increased font size for better readability */
 }
 
 /* Offbeat quiz popup */
@@ -169,10 +184,15 @@
 }
 
 .funky-register-button{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #13ba00;
-  padding: 8px 16px;
+  padding: 15px 25px;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 20px;
   color: #fff;
 }
 
@@ -196,6 +216,34 @@
     align-items: flex-start;
 }
 
+.additional-info{
+  text-align: center;
+  font-size: 20px;
+  animation: fadeIn 1s ease-in-out forwards; /* Apply fade-in animation */
+  opacity: 0;
+}
+
+.additional-info-organizer-email{
+  font-weight: bold;
+}
+
+.additional-info-event-date{
+  font-weight: bold;
+}
+
+.additional-info-event-location{
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start with opacity 0 */
+  }
+  to {
+    opacity: 1; /* Fade in to opacity 1 */
+  }
+}
+
 /* Media Queries */
 
 @media only screen and (max-width: 768px) {
@@ -206,5 +254,9 @@
   .custom-toast-message-attendee-view-event{
       width: 60%;
       top: 30%;
+  }
+
+  .unique-event-image{
+    max-width: 90%;
   }
 }
