@@ -249,24 +249,21 @@ const viewEvent = () => {
           className="unique-event-image"
           src={data.imageUrl}
           alt="Event Image"
-          height="200"
-          width="200"
         />
       )}
       <br /><br/>
-      <h3 className="funky-title">Title: {data.title}</h3>
-      <p className="funky-description">Description: {data.description}</p>
-      <p className="additional-info">Organizer Email: {additionalInfo.organizerEmail}</p>
-      <p className="additional-info">Event Date: {new Date(additionalInfo.eventDateTime).toDateString()}</p>
-      <p className="additional-info">Event Location: {additionalInfo.eventLocation}</p>
-      
+      <h3 className="funky-title">{data.title}</h3>
+      <p className="funky-description">{data.description}</p>
+      <br/>
+      <p className="additional-info">Organizer Email: <span className="additional-info-organizer-email">{additionalInfo.organizerEmail}</span></p>
+<p className="additional-info">Event Date: <span className="additional-info-event-date">{new Date(additionalInfo.eventDateTime).toDateString()}</span></p>
+<p className="additional-info">Event Location: <span className="additional-info-event-location"><a href={additionalInfo.eventLocation} target="_blank" rel="noopener noreferrer">View Event Location</a></span></p>
       <br/><br/>
 
       <button onClick={handleShowQuizPopUp} className="quirky-quiz-button">
         Take Test
       </button>
 
-      <br />
       <br />
       <button
         className={`funky-register-button ${buttonStyle}`}
