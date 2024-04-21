@@ -6,7 +6,7 @@ import './homePage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Link from 'next/link';
 import NavbarComponent from './components/navbar/navbar';
-import ImageCarousel from './components/carousel/imageCarousel';
+// import ImageCarousel from './components/carousel/imageCarousel';
 import Cards from './components/cards/cards';
 import Footer from './components/footer/Footer';
 import Makers from './components/Makers/makers';
