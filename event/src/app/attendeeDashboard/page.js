@@ -80,6 +80,16 @@ const AttendeeDashboard = () => {
     setFilteredData(filteredEvents);
   };
 
+const truncateDescription = (description) => {
+  const words = description.split(' ');
+  if (words.length > 15) {
+    return words.slice(0, 15).join(' ') + '...';
+  } else {
+    return description;
+  }
+};
+
+
   return (
     <>
       <AttendeeNavbarComponent />
@@ -105,7 +115,7 @@ const AttendeeDashboard = () => {
               <li key={item._id} className="event-list-item">
                 <p className="event-title">Title: {item.title}</p>
                 <p className="event-description">
-                  Description: {item.description}
+                  Description: {truncateDescription(item.description)}
                 </p>
                 {item.imageUrl && (
                   <img
