@@ -108,6 +108,17 @@ const Dashboard = () => {
     router.push("/dashboard/addData/");
   };
 
+  // Function to truncate description to maximum of 15 words
+const truncateDescription = (description) => {
+  const words = description.split(' ');
+  if (words.length > 15) {
+    return words.slice(0, 15).join(' ') + '...';
+  } else {
+    return description;
+  }
+};
+
+
   return (
     <>
       <OrganizerNavbarComponent />
@@ -138,7 +149,7 @@ const Dashboard = () => {
                 )}
                 <div className="card-body">
                   <h5 className="card-title">Title: {item.title}</h5>
-                  <p className="card-text">Description: {item.description}</p>
+                  <p className="card-text">Description: {truncateDescription(item.description)}</p>
                 </div>
                 <div className="card-footer">
                   <div className="unique-organizer-dashboard-entry-buttons">
