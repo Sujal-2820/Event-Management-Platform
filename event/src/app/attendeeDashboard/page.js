@@ -82,8 +82,8 @@ const AttendeeDashboard = () => {
 
 const truncateDescription = (description) => {
   const words = description.split(' ');
-  if (words.length > 15) {
-    return words.slice(0, 15).join(' ') + '...';
+  if (words.length > 25) {
+    return words.slice(0, 25).join(' ') + '...';
   } else {
     return description;
   }
