@@ -9,24 +9,24 @@ function NewLayout() {
   // Developers data
     const developers = [
       {
-        name: 'Sujal Soni',
-        description: 'Full Stack Developer',
-        image: '/static/images/Sujal-Soni1.jpg',
-        linkedin: 'https://www.linkedin.com/in/sujal-soni',
-        twitter: 'https://twitter.com/SujalSoni123',
+        name: 'Tanishq Sharma',
+        description: 'Frontend Developer',
+        image: '/static/images/tanishq.jpg',
+        linkedin: 'https://www.linkedin.com/in/tanishq-sharma-580bb0245/',
+        twitter: 'https://x.com/',
       },
       {
-        name: 'Silky Modi',
+        name: 'Tanmay Porwal',
         description: 'UI/UX Designer',
-        image: '/static/images/Silky.jpg',
-        linkedin: 'https://www.linkedin.com/in/silky-modi-b11879227',
-        twitter: 'https://x.com/SilkyModi25?s=08',
+        image: '/static/images/tanmay.jpg',
+        linkedin: 'https://www.linkedin.com/in/tanmay-porwal-a5a8b61a8/',
+        twitter: 'https://x.com/',
       },
       {
-        name: 'Suhani Soni',
-        description: 'UI Designer',
-        image: '/static/images/Suhani.jpeg',
-        linkedin: 'https://www.linkedin.com/in/suhani-soni-4a9380255?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+        name: 'Somitra Soni',
+        description: 'Backend Developer',
+        image: '/static/images/Somitra.png',
+        linkedin: 'https://www.linkedin.com/in/somitra-soni-01471a330/',
         twitter: 'https://twitter.com/',
       },
     ];
