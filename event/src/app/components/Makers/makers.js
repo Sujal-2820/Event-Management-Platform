@@ -10,7 +10,7 @@ function NewLayout() {
     const developers = [
       {
         name: 'Sujal Soni',
-        description: 'Full Stack Web Developer Developer',
+        description: 'Full Stack Web Developer',
         image: '/static/images/Sujal-Soni1.jpg',
         linkedin: 'https://www.linkedin.com/in/sujal-soni/',
         twitter: 'https://x.com/SujalSoni123',
