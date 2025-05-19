@@ -25,7 +25,7 @@ function NewLayout() {
       {
         name: 'Suhani Soni',
         description: 'UI/UX designer',
-        image: '/static/images/Suhani.png',
+        image: '/static/images/Suhani.jpeg',
         linkedin: 'https://www.linkedin.com/',
         twitter: 'https://x.com/',
       },
