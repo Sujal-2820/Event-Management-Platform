@@ -9,25 +9,25 @@ function NewLayout() {
   // Developers data
     const developers = [
       {
-        name: 'Tanishq Sharma',
-        description: 'Frontend Developer',
-        image: '/static/images/tanishq.jpg',
-        linkedin: 'https://www.linkedin.com/in/tanishq-sharma-580bb0245/',
+        name: 'Sujal Soni',
+        description: 'Full Stack Web Developer Developer',
+        image: '/static/images/Sujal-Soni1.jpg',
+        linkedin: 'https://www.linkedin.com/in/sujal-soni/',
+        twitter: 'https://x.com/SujalSoni123',
+      },
+      {
+        name: 'Silky Modi',
+        description: 'Frontend Designer',
+        image: '/static/images/Silky.jpg',
+        linkedin: 'https://www.linkedin.com/',
         twitter: 'https://x.com/',
       },
       {
-        name: 'Tanmay Porwal',
-        description: 'UI/UX Designer',
-        image: '/static/images/tanmay.jpg',
-        linkedin: 'https://www.linkedin.com/in/tanmay-porwal-a5a8b61a8/',
+        name: 'Suhani Soni',
+        description: 'UI/UX designer',
+        image: '/static/images/Suhani.png',
+        linkedin: 'https://www.linkedin.com/',
         twitter: 'https://x.com/',
-      },
-      {
-        name: 'Somitra Soni',
-        description: 'Backend Developer',
-        image: '/static/images/Somitra.png',
-        linkedin: 'https://www.linkedin.com/in/somitra-soni-01471a330/',
-        twitter: 'https://twitter.com/',
       },
     ];
 
