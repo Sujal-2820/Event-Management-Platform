@@ -8,27 +8,27 @@ import './makers.css'; // Import the CSS file
 function NewLayout() {
   // Developers data
     const developers = [
+      // {
+      //   name: 'Sujal Soni',
+      //   description: 'Full Stack Web Developer',
+      //   image: '/static/images/Sujal-Soni1.jpg',
+      //   linkedin: 'https://www.linkedin.com/in/sujal-soni/',
+      //   twitter: 'https://x.com/SujalSoni123',
+      // },
       {
-        name: 'Sujal Soni',
-        description: 'Full Stack Web Developer',
-        image: '/static/images/Sujal-Soni1.jpg',
-        linkedin: 'https://www.linkedin.com/in/sujal-soni/',
-        twitter: 'https://x.com/SujalSoni123',
-      },
-      {
-        name: 'Silky Modi',
-        description: 'Frontend Designer',
-        image: '/static/images/Silky.jpg',
+        name: 'Tanmay Porwal',
+        description: 'Web Designer',
+        image: '/static/images/tanmay.jpg',
         linkedin: 'https://www.linkedin.com/',
         twitter: 'https://x.com/',
-      },
-      {
-        name: 'Suhani Soni',
-        description: 'UI/UX designer',
-        image: '/static/images/Suhani.jpeg',
-        linkedin: 'https://www.linkedin.com/',
-        twitter: 'https://x.com/',
-      },
+      }
+      // {
+      //   name: 'Suhani Soni',
+      //   description: 'UI/UX designer',
+      //   image: '/static/images/Suhani.jpeg',
+      //   linkedin: 'https://www.linkedin.com/',
+      //   twitter: 'https://x.com/',
+      // },
     ];
 
   return (
